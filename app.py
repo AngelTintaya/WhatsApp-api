@@ -1,6 +1,19 @@
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 app = Flask(__name__)
+
+# SQLite Database Configuration
+app.config('SQLALCHEMY_DATABASE_URI') = 'sqlite:///metapython.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+# Log Table Datamodel
+class log(db.Model):
+    id=db.Column(db.Integer, primary_key=True)
+    fecha_y_hora = db.Column(db.Datetime, default=datetime.utcnow)
+    texto = db.Column(db.TEXT)
 
 @app.route('/')
 
