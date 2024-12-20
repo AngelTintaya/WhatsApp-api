@@ -20,12 +20,14 @@ class Log(db.Model):
 with app.app_context():
     db.create_all()
 
+    """
     prueba1 = Log(texto = 'Mensaje de prueba 1')
     prueba2 = Log(texto = 'Mensaje de prueba 2')
 
     db.session.add(prueba1)
     db.session.add(prueba2)
     db.session.commit()
+    """
 
 # Function to order records by datetime
 def order_by_date(records):
