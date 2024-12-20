@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import json
@@ -50,6 +50,26 @@ def add_messages_log(texto):
     new_record = Log(texto=texto)
     db.session.add(new_record)
     db.session.commit()
+
+# Token de verificación para la configuración del webhook
+TOKEN_EVA = 'EVATOKEN'
+
+@app.route('/webhook', methods=['GET', 'POST'])
+def webhook():
+    if request.method == 'GET':
+        challengue = verificar_token(request)
+        
+        return challengue
+    elif request.method == 'POST':
+        response = recibir_mensajes(request)
+
+        return response
+
+def verificar_token(req):
+    return 0
+
+def recibir_mensaje(req):
+    return 0
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80, debug=True)
