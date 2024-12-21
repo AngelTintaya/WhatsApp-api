@@ -118,9 +118,46 @@ def enviar_mensajes_whatsapp(texto, number):
             "type": "text",
             "text": {
                 "preview_url": False,
-                "body": "Hola, como estas?. \nBienvenido"
+                "body": "🚀 Hola, ¿Cómo estás? Bienvenido."
             }
         }
+    elif "1" in texto:
+        data = {
+            "messaging_product": "whatsapp",    
+            "recipient_type": "individual",
+            "to": number,
+            "type": "text",
+            "text": {
+                "preview_url": False,
+                "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            }
+        }
+    elif "2" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": number,
+            "type": "location",
+            "location": {
+                "latitude": "-12.135245519053214",
+                "longitude": "-77.02191294280868",
+                "name": "UTEC Post-Grado (TechMBA)",
+                "address": "Barranco, UTEC Ventures"
+            }
+        }
+    elif "3" in texto:
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": number,
+            "type": "document",
+            "document": {
+                "link": "https://startup.proinnovate.gob.pe/wp-content/uploads/2023/10/Startup-Peru-10G-Manual-de-Postulacion.pdf",
+                "caption": "Temario de curso Capstone"
+            }
+        }
+    elif "4" in texto:
+        data = {}
     else:
         data = {
             "messaging_product": "whatsapp",    
@@ -129,7 +166,7 @@ def enviar_mensajes_whatsapp(texto, number):
             "type": "text",
             "text": {
                 "preview_url": False,
-                "body": "Hola, visita mi web: https://angeltintaya.github.io"
+                "body": "🚀 Hola, visita mi web: https://angeltintaya.github.io para más información. \n\n📌 Por favor, ingresa un número #️⃣ para recibir información.\n1️⃣. Información del curso. ❔\n2️⃣. Ubicación del local. 📍\n3️⃣. Enviar temario en PDF. 📄\n4️⃣. Audio explicando curso. 🎧\n5️⃣. Video de introducción. ⏯️\n6️⃣. Hablar con EvA. 🙋🏻\n7️⃣. Horario de atención. 🕝\n0️⃣. Regresar al menú. 📋"
             }
         }
     
