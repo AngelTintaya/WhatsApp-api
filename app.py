@@ -1,10 +1,18 @@
 from flask import Flask, request, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from dotenv import load_dotenv
 import http.client
 import json
+import os
 
 app = Flask(__name__)
+load_dotenv()  # Load environment variables from .env
+
+SECRET_TOKEN = os.getenv('FLASK_SECRET_TOKEN')
+
+if not SECRET_TOKEN:
+    raise ValueError("FLASK_SECRET_TOKEN is not set!")
 
 # SQLite Database Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///metapython.db'
@@ -414,7 +422,7 @@ def enviar_mensajes_whatsapp(texto, number):
 
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer EAANfFwakcRIBO085xZA2iZAIxL7rY3mcdXMI2AVIV533FE2huOIviSLoSQnNafvRYOYO7a36y177esPisQLgItY5vXn3tEQMiBMHw2sG6iK6CgJmmyaGwKiUI07vBaD4LBUn66P76670ZCbCMZCKFd6XR8xg5VORWDgKBklARROwI4jUtr6KrHzBVkzj9jZC1JkJszI6TkiRX3a1EnWrCP5QU'
+        'Authorization': f'Bearer {SECRET_TOKEN}'
     }
 
     connection = http.client.HTTPSConnection('graph.facebook.com')
