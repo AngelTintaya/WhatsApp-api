@@ -297,6 +297,59 @@ def enviar_mensajes_whatsapp(texto, number):
                 "body": "Estaré a la espera."
             }
         }
+    elif "lista" in texto:
+        data = {
+            "messaging_product": "whatsapp",    
+            "recipient_type": "individual",
+            "to": number,
+            "type": "interactive",
+            "interactive": {
+                "type": "list",
+                "body": {
+                    "text": "Selecciona alguna opción"
+                },
+                "footer": {
+                    "text": "Selecciona una de las opciones para poder ayudarte"
+                },
+                "action": {
+                    "button": "Ver opciones",
+                    "sections": [
+                        {
+                            "title": "Compra y venta",
+                            "rows": [
+                                {
+                                    "id": "btncompra",
+                                    "title": "Comprar",
+                                    "description": "Compra los mejores artículos en tecnología"
+                                },
+                                {
+                                    "id": "btnventa",
+                                    "title": "Vender",
+                                    "description": "Vende lo que ya no estés usando."
+                                }
+                            ]
+                        },
+                        {
+                            "title": "Distribución y entrega",
+                            "rows": [
+                                {
+                                    "id": "btndireccion",
+                                    "title": "Local",
+                                    "description": "Puedes visitar nuestro local."
+                                },
+                                {
+                                    "id": "btnentrega",
+                                    "title": "Entrega",
+                                    "description": "La entrega se realiza todos los días."
+                                }
+                            ]
+
+                        }
+                    ]
+                }
+
+            }
+        }
     else:
         data = {
             "messaging_product": "whatsapp",    
