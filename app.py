@@ -198,6 +198,7 @@ def enviar_mensajes_whatsapp(texto, number):
                 "preview_url": False,
                 "body": "🗓️ Horario de atención: Lunes a Viernes. \n🕝 Horario : 9:00 am a 5:00 pm 👱‍♂️"
             }
+        }
     elif "0" in texto:
         data = {
             "messaging_product": "whatsapp",    
@@ -208,6 +209,7 @@ def enviar_mensajes_whatsapp(texto, number):
                 "preview_url": False,
                 "body": "🚀 Hola, visita mi web: https://angeltintaya.github.io para más información. \n\n📌 Por favor, ingresa un número #️⃣ para recibir información.\n\n1️⃣. Información del curso. ❔\n2️⃣. Ubicación del local. 📍\n3️⃣. Enviar temario en PDF. 📄\n4️⃣. Audio explicando curso. 🎧\n5️⃣. Video de introducción. ⏯️\n6️⃣. Hablar con EvA. 🙋🏻\n7️⃣. Horario de atención. 🕝\n0️⃣. Regresar al menú. 📋"
             }
+        }
     else:
         data = {
             "messaging_product": "whatsapp",    
