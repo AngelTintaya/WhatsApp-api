@@ -1,0 +1,39 @@
+{
+    "object": "whatsapp_business_account",
+    "entry": [
+        {
+            "id": "503952539463858",
+            "changes": [
+                {
+                    "value": {
+                        "messaging_product": "whatsapp",
+                        "metadata": {
+                            "display_phone_number": "15551681928",
+                            "phone_number_id": "447962701732006"
+                        },
+                        "contacts": [
+                            {
+                                "profile": {
+                                    "name": "Angel Tintaya Monroy"
+                                },
+                                "wa_id": "51939927185"
+                            }
+                        ],
+                        "messages": [
+                            {
+                                "from": "51939927185",
+                                "id": "wamid.HBgLNTE5Mzk5MjcxODUVAgASGBQzQTUwMjVGQkVGODg1QUEzMTAxOQA=",
+                                "timestamp": "1734738888",
+                                "text": {
+                                    "body": "Tengo una duda! \ud83d\ude4b"
+                                },
+                                "type": "text"
+                            }
+                        ]
+                    },
+                    "field": "messages"
+                }
+            ]
+        }
+    ]
+}

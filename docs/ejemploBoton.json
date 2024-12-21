@@ -1,0 +1,17 @@
+{
+    "context": {
+        "from": "15551681928",
+        "id": "wamid.HBgLNTE5Mzk5MjcxODUVAgARGBI3MENCQzE0OTNFOEU3RDg5NDcA"
+    },
+    "from": "51939927185",
+    "id": "wamid.HBgLNTE5Mzk5MjcxODUVAgASGBQzQTgzMzBFOTJGNzZDRkNFQjgwMAA=",
+    "timestamp": "1734755656",
+    "type": "interactive",
+    "interactive": {
+        "type": "button_reply",
+        "button_reply": {
+            "id": "btnno",
+            "title": "No"
+        }
+    }
+}
