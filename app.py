@@ -153,11 +153,20 @@ def enviar_mensajes_whatsapp(texto, number):
             "type": "document",
             "document": {
                 "link": "https://startup.proinnovate.gob.pe/wp-content/uploads/2023/10/Startup-Peru-10G-Manual-de-Postulacion.pdf",
-                "caption": "Temario de curso Capstone"
+                "caption": "Temario de curso Capstone",
+                "filename": "Startup_Peru_Temario.pdf"
             }
         }
     elif "4" in texto:
-        data = {}
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": "51939927185",
+            "type": "audio",
+            "audio": {
+                "link": "https://download.samplelib.com/mp3/sample-3s.mp3"
+            }
+        }
     else:
         data = {
             "messaging_product": "whatsapp",    
@@ -166,7 +175,7 @@ def enviar_mensajes_whatsapp(texto, number):
             "type": "text",
             "text": {
                 "preview_url": False,
-                "body": "🚀 Hola, visita mi web: https://angeltintaya.github.io para más información. \n\n📌 Por favor, ingresa un número #️⃣ para recibir información.\n1️⃣. Información del curso. ❔\n2️⃣. Ubicación del local. 📍\n3️⃣. Enviar temario en PDF. 📄\n4️⃣. Audio explicando curso. 🎧\n5️⃣. Video de introducción. ⏯️\n6️⃣. Hablar con EvA. 🙋🏻\n7️⃣. Horario de atención. 🕝\n0️⃣. Regresar al menú. 📋"
+                "body": "🚀 Hola, visita mi web: https://angeltintaya.github.io para más información. \n\n📌 Por favor, ingresa un número #️⃣ para recibir información.\n\n1️⃣. Información del curso. ❔\n2️⃣. Ubicación del local. 📍\n3️⃣. Enviar temario en PDF. 📄\n4️⃣. Audio explicando curso. 🎧\n5️⃣. Video de introducción. ⏯️\n6️⃣. Hablar con EvA. 🙋🏻\n7️⃣. Horario de atención. 🕝\n0️⃣. Regresar al menú. 📋"
             }
         }
     
@@ -175,7 +184,7 @@ def enviar_mensajes_whatsapp(texto, number):
 
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer EAANfFwakcRIBO5a2ZCyFfwGpYtfDxjCc66OC9vlp8vmuWq2SGkeitBODwg8C7ruYiFrkE8EvOK7EfJ94ZBy2ih3ZADaGnRDNUZA4AFlGv1ZC3jjOVtrswXFS7YdjinWeZBP3HF2Beme8wyD8dAdsGbZAMbs7wYxPZAKBaIZARka8dCIEHZC3vRTOWztLMYZATYERDNolWH4ZBxy2WvjfOrkNYAW8LfiV'
+        'Authorization': 'Bearer EAANfFwakcRIBO0YGAmYSJl9gkwFDX6Gl014yk3HcyNKssqmDYL3p0YoMz9XPSf2f0ztzxisWItvKVDlXvkyqONYooZBjvT0QX9rc1azUiFeXHRlfM4z8yBaRN5EusfMWuedSpaItzZBNkZAYqRnfhUeopp2xRiIIceyR2PF5eAPmju6qEr1r4SsRefBSubngGc0cGRS3cKTRZAnhFNZBdf2yI'
     }
 
     connection = http.client.HTTPSConnection('graph.facebook.com')
