@@ -93,15 +93,21 @@ def recibir_mensajes(req):
             if 'type' in messages:
                 tipo = messages['type']
 
+                # Save log in BD
+                add_messages_log(json.dumps(tipo))
+
                 if tipo == 'interactive':
                     return 0
                 
                 if 'text' in messages:
                     text = messages['text']['body']
                     numero = messages['from']
-                    add_messages_log(json.dumps(text))
-                    add_messages_log(json.dumps(numero))
+                    # add_messages_log(json.dumps(text))
+                    # add_messages_log(json.dumps(numero))
                     enviar_mensajes_whatsapp(text, numero)
+
+                    # Save log in BD
+                    add_messages_log(json.dumps(messages))
 
         return jsonify({'message': 'EVENT_RECEIVED'})
     except Exception as e:
@@ -208,6 +214,48 @@ def enviar_mensajes_whatsapp(texto, number):
             "text": {
                 "preview_url": False,
                 "body": "🚀 Hola, visita mi web: https://angeltintaya.github.io para más información. \n\n📌 Por favor, ingresa un número #️⃣ para recibir información.\n\n1️⃣. Información del curso. ❔\n2️⃣. Ubicación del local. 📍\n3️⃣. Enviar temario en PDF. 📄\n4️⃣. Audio explicando curso. 🎧\n5️⃣. Video de introducción. ⏯️\n6️⃣. Hablar con EvA. 🙋🏻\n7️⃣. Horario de atención. 🕝\n0️⃣. Regresar al menú. 📋"
+            }
+        }
+    elif "boton" in texto:
+        data = {
+            "messaging_product": "whatsapp",    
+            "recipient_type": "individual",
+            "to": number,
+            "type": "interactive",
+            "interactive": {
+                "type": "button",
+                "body": {
+                    "text": "¿Confirmas tu registro?"
+                },
+                "footer": {
+                    "text": "Selecciona una de las opciones"
+                },
+                "action": {
+                    "buttons": [
+                        {
+                            "type": "reply",
+                            "reply": {
+                                "id": "btnsi",
+                                "title": "Si"
+                            }
+                        },
+                        {
+                            "type": "reply",
+                            "reply": {
+                                "id": "btnno",
+                                "title": "No"
+                            }
+                        },
+                        {
+                            "type": "reply",
+                            "reply": {
+                                "id": "btntalvez",
+                                "title": "Tal vez"
+                            }
+                        }
+                    ]
+                }
+
             }
         }
     else:
