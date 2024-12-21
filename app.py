@@ -13,6 +13,8 @@ SECRET_TOKEN = os.getenv('SECRET_TOKEN')
 
 if not SECRET_TOKEN:
     raise ValueError("FLASK_SECRET_TOKEN is not set!")
+print('='*50)
+print(f'SECRET: {SECRET_TOKEN}')
 
 # SQLite Database Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///metapython.db'
