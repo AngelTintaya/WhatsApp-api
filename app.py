@@ -104,6 +104,12 @@ def recibir_mensajes(req):
                         numero = messages['from']
 
                         enviar_mensajes_whatsapp(text, numero)
+                    
+                    elif tipo_interactivo == 'list_reply':
+                        text = messages['interactive']['list_reply']['id']
+                        numero = messages['from']
+
+                        enviar_mensajes_whatsapp(text, numero)
                 
                 if 'text' in messages:
                     text = messages['text']['body']
@@ -348,6 +354,50 @@ def enviar_mensajes_whatsapp(texto, number):
                     ]
                 }
 
+            }
+        }
+    elif "btncompra" in texto:
+        data = {
+            "messaging_product": "whatsapp",    
+            "recipient_type": "individual",
+            "to": number,
+            "type": "text",
+            "text": {
+                "preview_url": False,
+                "body": "Los mejores artículos top en ofertas."
+            }
+        }
+    elif "btnventa" in texto:
+        data = {
+            "messaging_product": "whatsapp",    
+            "recipient_type": "individual",
+            "to": number,
+            "type": "text",
+            "text": {
+                "preview_url": False,
+                "body": "Excelente elección."
+            }
+        }
+    elif "btndireccion" in texto:
+        data = {
+            "messaging_product": "whatsapp",    
+            "recipient_type": "individual",
+            "to": number,
+            "type": "text",
+            "text": {
+                "preview_url": False,
+                "body": "Te encantará nuestro local."
+            }
+        }
+    elif "btnentrega" in texto:
+        data = {
+            "messaging_product": "whatsapp",    
+            "recipient_type": "individual",
+            "to": number,
+            "type": "text",
+            "text": {
+                "preview_url": False,
+                "body": "Si no lo recibes a tiempo, el envío es gratis."
             }
         }
     else:

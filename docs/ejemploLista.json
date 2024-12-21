@@ -1,0 +1,18 @@
+{
+    "context": {
+        "from": "15551681928",
+        "id": "wamid.HBgLNTE5Mzk5MjcxODUVAgARGBI1QzMzQzM4MjA5MEJFREIxQkUA"
+    },
+    "from": "51939927185",
+    "id": "wamid.HBgLNTE5Mzk5MjcxODUVAgASGBQzQUEyNURFOTRBMjgxNThDMzg1MgA=",
+    "timestamp": "1734758461",
+    "type": "interactive",
+    "interactive": {
+        "type": "list_reply",
+        "list_reply": {
+            "id": "btncompra",
+            "title": "Comprar",
+            "description": "Compra los mejores art\u00edculos en tecnolog\u00eda"
+        }
+    }
+}
