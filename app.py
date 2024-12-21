@@ -9,7 +9,7 @@ import os
 app = Flask(__name__)
 load_dotenv()  # Load environment variables from .env
 
-SECRET_TOKEN = os.getenv('FLASK_SECRET_TOKEN')
+SECRET_TOKEN = os.getenv('SECRET_TOKEN')
 
 if not SECRET_TOKEN:
     raise ValueError("FLASK_SECRET_TOKEN is not set!")
