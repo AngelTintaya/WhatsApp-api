@@ -94,7 +94,7 @@ def recibir_mensajes(req):
                 tipo = messages['type']
 
                 # Save log in BD
-                add_messages_log(json.dumps(tipo))
+                add_messages_log(json.dumps(messages))
 
                 if tipo == 'interactive':
                     return 0
