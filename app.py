@@ -449,7 +449,7 @@ def send_first_contact():
 
         # Iterate over the list of numbers and send the message
         for user in users:
-            message = '~'.join(user['name'], user['company'])
+            message = '~'.join([user['name'], user['company']])
             enviar_mensajes_whatsapp(message, user['phone_number'])  # You need to implement this function
 
         return jsonify({'message': f'Messages sent to {len(users)} numbers successfully.'}), 200
