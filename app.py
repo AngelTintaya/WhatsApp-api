@@ -9,7 +9,8 @@ import os
 app = Flask(__name__)
 load_dotenv()  # Load environment variables from .env
 
-SECRET_TOKEN = os.getenv('SECRET_TOKEN')
+SECRET_TOKEN = os.getenv('SECRET_TOKEN')  # Use your WhatsApp Cloud API access token
+PHONE_NUMBER_ID = os.getenv('PHONE_NUMBER_ID')  # Your WhatsApp number ID
 
 if not SECRET_TOKEN:
     raise ValueError("FLASK_SECRET_TOKEN is not set!")
@@ -430,13 +431,34 @@ def enviar_mensajes_whatsapp(texto, number):
     connection = http.client.HTTPSConnection('graph.facebook.com')
 
     try:
-        connection.request('POST', '/v21.0/447962701732006/messages', data, headers)
+        connection.request('POST', f'/v21.0/{PHONE_NUMBER_ID}/messages', data, headers)
         response = connection.getresponse()
         print(response.status, response.reason)
     except Exception as e:
         add_messages_log(json.dumps(e))
     finally:
         connection.close()
+
+@app.route('/send_first_contact', methods=['POST'])
+def send_first_contact():
+    try:
+        data = request.get_json()  # Get the incoming data from the POST request
+        
+        if 'users' in data and isinstance(data['users'], list):
+            users = data['users']
+        else:
+            return jsonify({'error': 'Invalid input, expected a list of numbers.'}), 400
+
+        # Iterate over the list of numbers and send the message
+        for user in users:
+            message = '~'.join(user['name'], user['company'])
+            enviar_mensajes_whatsapp(message, user['phone_number'])  # You need to implement this function
+
+        return jsonify({'message': f'Messages sent to {len(users)} numbers successfully.'}), 200
+    
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({'message': 'Error occurred while sending messages'}), 500
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80, debug=True)
