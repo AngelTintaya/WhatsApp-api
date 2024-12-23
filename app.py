@@ -456,7 +456,7 @@ def send_first_contact():
     
     except Exception as e:
         print(f"Error: {e}")
-        return jsonify({'message': 'Error occurred while sending messages'}), 500
+        return jsonify({'message': f'Error occurred while sending messages\n{e}'}), 500
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80, debug=True)
