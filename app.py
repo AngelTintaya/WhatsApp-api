@@ -14,8 +14,6 @@ PHONE_NUMBER_ID = os.getenv('PHONE_NUMBER_ID')  # Your WhatsApp number ID
 
 if not SECRET_TOKEN:
     raise ValueError("FLASK_SECRET_TOKEN is not set!")
-print('='*50)
-print(f'SECRET: {SECRET_TOKEN}')
 
 # SQLite Database Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///metapython.db'
@@ -439,7 +437,7 @@ def enviar_mensajes_whatsapp(texto, number):
     finally:
         connection.close()
 
-@app.route('/send_first_contact', methods=['POST'])
+@app.route('/send_first_contact', methods=['GET', 'POST'])
 def send_first_contact():
     try:
         data = request.get_json()  # Get the incoming data from the POST request
