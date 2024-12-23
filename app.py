@@ -407,7 +407,7 @@ def enviar_mensajes_whatsapp(texto, number):
             }
         }
     elif "~" in texto:
-        name_value, company_value = texto.split('~')
+        name_value, company_value = [t.title for t in texto.split('~')]
         data = {
             "messaging_product": "whatsapp",
             "to": number,
