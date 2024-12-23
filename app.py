@@ -406,6 +406,36 @@ def enviar_mensajes_whatsapp(texto, number):
                 "body": "Si no lo recibes a tiempo, el envío es gratis."
             }
         }
+    elif "~" in texto:
+        name_value, company_value = texto.split('~')
+        data = {
+            "messaging_product": "whatsapp",
+            "to": number,
+            "type": "template",
+            "template": {
+                "name": "eva_car_maintenance",
+                "language": {
+                    "code": "es"
+                    },
+                "components": [
+                    {
+                        "type": "body",
+                        "parameters": [
+                            {
+                                "type": "text",
+                                "parameter_name": "name",
+                                "text": name_value
+                            },
+                            {
+                                "type": "text",
+                                "parameter_name": "company",
+                                "text": company_value
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
     else:
         data = {
             "messaging_product": "whatsapp",    
