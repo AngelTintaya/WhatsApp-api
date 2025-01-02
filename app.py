@@ -185,7 +185,7 @@ def enviar_mensajes_whatsapp(texto, number):
         data = {
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
-            "to": "51939927185",
+            "to": number,
             "type": "audio",
             "audio": {
                 "link": "https://download.samplelib.com/mp3/sample-3s.mp3"
