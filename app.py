@@ -205,7 +205,7 @@ def enviar_mensajes_whatsapp(texto, number):
     data = json.dumps(data)
 
     headers = {
-        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Type': 'application/json',
         'Authorization': f'Bearer {SECRET_TOKEN}'
     }
 
