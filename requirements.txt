@@ -1,3 +1,11 @@
+# Whatsapp API
 flask==3.1.0
 flask-sqlalchemy==3.1.1
 python-dotenv==1.0.1
+
+# Agentic AI
+phidata==2.7.6
+groq==0.13.1
+
+# Time Zone
+pytz==2024.2
