@@ -9,6 +9,14 @@ import os
 from db_setup import setup_database
 from agent_ai import ask_eva
 
+import unicodedata # To normalize text
+
+def normalize_text(text):
+    """
+    Normalize the input text to remove accents.
+    """
+    return unicodedata.normalize("NFD", text).encode("ascii", "ignore").decode("utf-8")
+
 app = Flask(__name__)
 load_dotenv()  # Load environment variables from .env
 setup_database()  # Set up database if not exists
@@ -51,6 +59,12 @@ def order_by_date(records):
 def index():
     # Get all records from database
     records = Log.query.all()
+
+    # Decode any encoded text before rendering
+    for record in records:
+        if isinstance(record.texto, bytes):  # Handle any unexpected cases
+            record.texto = record.texto.decode('utf-8')
+
     ordered_records = order_by_date(records)
     return render_template('index.html', records=ordered_records)
 
@@ -168,7 +182,7 @@ def enviar_mensajes_whatsapp(texto, number):
                 ]
             }
         }
-    elif "adios" in texto:
+    elif "adios" in normalize_text(texto):
         data = {
             "messaging_product": "whatsapp",    
             "recipient_type": "individual",
