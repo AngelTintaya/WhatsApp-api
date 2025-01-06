@@ -5,7 +5,9 @@ from dotenv import load_dotenv
 import http.client
 import json
 import os
+
 from db_setup import setup_database
+from agent_ai import ask_eva
 
 app = Flask(__name__)
 load_dotenv()  # Load environment variables from .env
@@ -134,6 +136,82 @@ def recibir_mensajes(req):
         return jsonify({'message': 'EVENT_RECEIVED'})
 
 def enviar_mensajes_whatsapp(texto, number):
+    texto = texto.lower()
+
+    if "~" in texto: # First contact message
+        name_value, company_value = [t.title() for t in texto.split('~')]
+        data = {
+            "messaging_product": "whatsapp",
+            "to": number,
+            "type": "template",
+            "template": {
+                "name": "eva_car_maintenance",
+                "language": {
+                    "code": "es"
+                    },
+                "components": [
+                    {
+                        "type": "body",
+                        "parameters": [
+                            {
+                                "type": "text",
+                                "parameter_name": "name",
+                                "text": name_value
+                            },
+                            {
+                                "type": "text",
+                                "parameter_name": "company",
+                                "text": company_value
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    elif "adios" in texto:
+        data = {
+            "messaging_product": "whatsapp",    
+            "recipient_type": "individual",
+            "to": number,
+            "type": "text",
+            "text": {
+                "preview_url": False,
+                "body": "Muchas gracias, hasta pronto!."
+            }
+        }
+    else:
+        eva_answer, _ = ask_eva(texto, number)
+        data = {
+            "messaging_product": "whatsapp",    
+            "recipient_type": "individual",
+            "to": number,
+            "type": "text",
+            "text": {
+                "preview_url": False,
+                "body": eva_answer
+            }
+        }
+    
+    # Convertir diccionario a formato json
+    data = json.dumps(data)
+
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {SECRET_TOKEN}'
+    }
+
+    connection = http.client.HTTPSConnection('graph.facebook.com')
+
+    try:
+        connection.request('POST', f'/v21.0/{PHONE_NUMBER_ID}/messages', data, headers)
+        response = connection.getresponse()
+        print(response.status, response.reason)
+    except Exception as e:
+        add_messages_log(json.dumps(e))
+    finally:
+        connection.close()
+
+def enviar_mensajes_whatsapp_1(texto, number):
     texto = texto.lower()
 
     if 'hola' in texto:
@@ -408,7 +486,7 @@ def enviar_mensajes_whatsapp(texto, number):
                 "body": "Si no lo recibes a tiempo, el envío es gratis."
             }
         }
-    elif "~" in texto:
+    elif "~" in texto: # First contact message
         name_value, company_value = [t.title() for t in texto.split('~')]
         data = {
             "messaging_product": "whatsapp",
