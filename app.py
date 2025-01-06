@@ -5,9 +5,11 @@ from dotenv import load_dotenv
 import http.client
 import json
 import os
+from db_setup import setup_database
 
 app = Flask(__name__)
 load_dotenv()  # Load environment variables from .env
+setup_database()  # Set up database if not exists
 
 SECRET_TOKEN = os.getenv('SECRET_TOKEN')  # Use your WhatsApp Cloud API access token
 PHONE_NUMBER_ID = os.getenv('PHONE_NUMBER_ID')  # Your WhatsApp number ID
