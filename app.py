@@ -59,13 +59,8 @@ def order_by_date(records):
 def index():
     # Get all records from database
     records = Log.query.all()
-
-    # Decode any encoded text before rendering
-    for record in records:
-        if isinstance(record.texto, bytes):  # Handle any unexpected cases
-            record.texto = record.texto.decode('utf-8')
-
     ordered_records = order_by_date(records)
+
     return render_template('index.html', records=ordered_records)
 
 message_log = []
@@ -210,7 +205,7 @@ def enviar_mensajes_whatsapp(texto, number):
     data = json.dumps(data)
 
     headers = {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
         'Authorization': f'Bearer {SECRET_TOKEN}'
     }
 
