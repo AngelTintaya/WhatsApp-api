@@ -27,9 +27,8 @@ def ask_eva(query: str, phone_number:int, rules: List[str] = None) -> str:
         # model=OpenAIChat(id="gpt-4o"),
         model=Groq(id="llama-3.3-70b-Versatile"),
         storage=SqlAgentStorage(table_name="agent_sessions", db_file="tmp/agent_storage.db"),
-        description="Eva, asistente del concesionario de autos Connectia, especializada en programar citas y responder preguntas."
+        description="Eva, asistente del concesionario de autos Connectia, especializada en programar citas y responder preguntas.",
         task="Gestionar citas y consultas sobre mantenimiento de autos.",
-
         instructions=[
             f"Hoy es {today_date}. Utiliza esta fecha como referencia para fechas relativas o validación.",
             "Inicia presentandote y pregunta amablemente el nombre del usuario.",
