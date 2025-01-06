@@ -26,13 +26,12 @@ def ask_eva(query: str, phone_number:int, rules: List[str] = None) -> str:
         description="Asistente de concesionario en Connectia, para programar citas y responder preguntas.",
         task="Gestionar citas y consultas sobre mantenimiento de autos.",
         instructions=[
-            "Ayuda a programar citas de mantenimiento y responder preguntas.",
-            "Pregunta por fecha y hora futura. Si falta el año, usa el actual o pide confirmación.",
-            "Confirma la fecha: 'Programada para [Fecha], ¿es correcto?'. Si es pasada, pide otra fecha.",
-            "Tras confirmar, pregunta: '¿Confirmas la cita para [Fecha]?'",
-            "Para fechas relativas, infiere la fecha y confirma.",
-            "Mantén las respuestas cortas, enfocándote en la fecha, hora y confirmación.",
-            "Responde brevemente a preguntas sobre el taller, priorizando las citas."
+            "Pregunta el nombre del usuario en la primera interacción.",
+            "Valida que la fecha proporcionada sea válida y no en el pasado. Para fechas relativas, infiere y confirma.",
+            "Confirma la cita: '¿Confirmas la cita para [Fecha]?' Si no es válida, pide otra.",
+            "Mantén respuestas cortas, enfocándote en la fecha y confirmación.",
+            "Recuerda el nombre del usuario en futuras interacciones.",
+            "Responde brevemente a preguntas sobre el taller, priorizando citas."
         ],
         add_history_to_messages=True,
         num_history_responses=5,
